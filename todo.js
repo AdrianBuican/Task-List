@@ -8,7 +8,8 @@ add.addEventListener('click', function(){
       alert('You need to type your task first')
    } else{
    const newContainer = document.createElement('div');
-   main.appendChild(newContainer)
+   main.appendChild(newContainer);
+   newContainer.classList.add('new-todo');
 
    const newTask = document.createElement('input');
    newTask.setAttribute('readOnly', true);
@@ -27,19 +28,25 @@ add.addEventListener('click', function(){
    deleteButton.innerText = 'Delete';
    newContainer.appendChild(deleteButton);
 
-      deleteButton.addEventListener('click', function(){
-         main.removeChild(newContainer);
+      deleteButton.addEventListener('click', () => {
+         newContainer.classList.add("removed");
       });
+      newContainer.ontransitionend = (event) => {
+         if (event.target === newContainer) { //the condition is important because otherwise it will delete the container once a child's transition ended
+            newContainer.remove()
+         }
+         else {}
+      }
 
       editButton.addEventListener('click', () => {
          if (editButton.innerText === 'Edit') {
             newTask.removeAttribute('readOnly');
             editButton.innerText = 'Save';
-            newTask.style.background = '#1d4768'
+            newTask.style.background = '#1c4769'
          } else {
             newTask.setAttribute('readOnly', true);
             editButton.innerText = 'Edit';
-            newTask.style.background = '#163954'
+            newTask.style.background = '#163651'
          }
       })
 }})
