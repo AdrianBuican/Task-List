@@ -1,3 +1,12 @@
+/* Colors */
+:root{
+   --blue: #245885;
+   --darkBlue: #0d1d31;
+   --lightBlue: #4084c1;
+   --green: #2b9a54;
+   --rose: #fc5056;
+}
+
 *{
    box-sizing:border-box;
    margin: 0;
@@ -6,8 +15,8 @@
 }
 
 body{
-   background:linear-gradient(0.125turn, #0a1b2d, #0e2e37);
-   color:rgba(255, 255, 255, 0.8);
+   background:var(--darkBlue);
+   color:white;
    min-height: 100vh;
 }
 
@@ -22,19 +31,29 @@ header{
 h1{
    font-size: 2.5rem;
    padding:10px 5px;
+   animation: shiny-text 3s linear infinite;
+   background: linear-gradient(
+      30deg, 
+      #2f76b4, 
+      #4393da,
+      #2f76b4,
+      #69b8fe
+   );
+   background-size: 200%;
+   background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   white-space: nowrap;
 }
 
-#text-input{
-   width:50%;
-   border-radius:7px;
-   background: #163954;
-   color: white;
-   padding:5px;
-   border: none;
-}
-
-::placeholder{
-   color:rgb(169, 168, 168);
+@keyframes shiny-text {
+   from {
+      background-position: 0% center;
+   }
+   
+   to {
+      background-position: -200% center;
+   }
 }
 
 main{
@@ -54,10 +73,31 @@ div{
    max-width: 600px;
 }
 
+hr{
+   width:90%;
+   margin:0 auto;
+   border-radius: 50%;
+   border-color: var(--lightBlue);
+}
+
+#text-input{
+   width:50%;
+   border-radius:7px;
+   background:#163651;
+   color: white;
+   padding:5px;
+   border: none;
+   transition: 0.3s;
+}
+
+::placeholder{
+   color:#c0c0c0;
+}
+
 .new-task{
    width:100%;
    border-radius:7px;
-   background: #163954;
+   background:#163651;
    color: white;
    padding:5px;
    border: none;
@@ -66,43 +106,50 @@ div{
 /* BUTTONS */
 
 #add{
-   background:linear-gradient(0.125turn, #fda623, #f34d5d);
+   background:var(--green);
    color:white;
    font-size: 1.5rem;
    padding: 2px 10px;
-   border:none;
+   border: none;
    border-radius: 3px;
+   transition: 0.3s
 }
 #add:hover{
-   opacity:0.7;
-   transition: 0.3s;
+   transform: scale(1.08);
+   cursor: pointer;
 }
 
 #edit-button{
-   background: #1d4768;
-   color:white;
-   border:none;
-   padding: 5px;
+   background:var(--darkBlue);
+   border: 2px solid var(--blue);
+   color:var(--green);
+   font-weight: bold;
+   padding: 5px 7px;
    border-radius: 3px;
+   transition: 0.3s;
 }
 #edit-button:hover{
-   background:#163954;
-   transition: 0.3s;
+   background: #132b48;
+   cursor: pointer;
 }
 
 #delete-button{
-   background:linear-gradient(0.125turn, #fda623, #f34d5d);
-   color: white;
-   border:none;
+   background:var(--darkBlue);
+   border: 2px solid var(--blue);
+   color: var(--rose);
+   font-weight: bold;
    padding: 5px;
    border-radius: 3px;
-}
-#delete-button:hover{
-   opacity:0.7;
    transition: 0.3s;
 }
+#delete-button:hover{
+   background: #132b48;
+   cursor: pointer;
+}
 
-hr{
-   width:90%;
-   margin:0 auto;
+/* Smooth delete transition */
+.removed{
+   transform: translateX(-50vw);
+   opacity: 0;
+   transition: 0.6s ease-out;
 }
